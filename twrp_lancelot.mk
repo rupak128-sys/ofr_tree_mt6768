@@ -1,42 +1,54 @@
 #
-# Copyright (C) 2023 The Android Open Source Project
-# Copyright (C) 2023 SebaUbuntu's TWRP device tree generator
+#	This file is part of the OrangeFox Recovery Project
+# 	Copyright (C) 2023 The OrangeFox Recovery Project
 #
-# SPDX-License-Identifier: Apache-2.0
+#	OrangeFox is free software: you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation, either version 3 of the License, or
+#	any later version.
+#
+#	OrangeFox is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+# 	This software is released under GPL version 3 or any later version.
+#	See <http://www.gnu.org/licenses/>.
+#
+# 	Please maintain this if you use this script or any part of it
 #
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+# OrangeFox settings
+OF_HIDE_NOTCH := 0
+OF_USE_GREEN_LED := 0
+OF_FLASHLIGHT_ENABLE := 1
+OF_ALLOW_DISABLE_NAVBAR := 0
+OF_QUICK_BACKUP_LIST := /data;/boot;
+OF_SKIP_MULTIUSER_FOLDERS_BACKUP := 1
+OF_ENABLE_USB_STORAGE := 1
+OF_IGNORE_LOGICAL_MOUNT_ERRORS := 1
+OF_BIND_MOUNT_SDCARD_ON_FORMAT := 1
+OF_FORCE_CASEFOLDING := 1
 
+# OrangeFox GUI settings
+OF_SCREEN_H := 2400
+OF_STATUS_H := 100
+OF_STATUS_INDENT_LEFT := 48
+OF_STATUS_INDENT_RIGHT := 48
+OF_HIDE_NOTCH := 1
+OF_CLOCK_POS := 1
+OF_OPTIONS_LIST_NUM := 6
 
-# Inherit some common Omni stuff.
-$(call inherit-product, vendor/twrp/config/common.mk)
+# Recovery additional features	
+OF_ENABLE_LPTOOLS := 1
+OF_AB_DEVICE_WITH_RECOVERY_PARTITION := 1
+OF_RECOVERY_AB_FULL_REFLASH_RAMDISK := 1
+OF_DISABLE_OTA_MENU := 1
+OF_DYNAMIC_FULL_SIZE := 9663676416
 
-# Inherit from lancelot device
-$(call inherit-product, device/xiaomi/lancelot/device.mk)
+# OTA
+OF_NO_TREBLE_COMPATIBILITY_CHECK := 1
+OF_PATCH_AVB20 := 1
+OF_KEEP_DM_VERITY_FORCED_ENCRYPTION := 1
 
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
-
-
-# Dynamic Partitions
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-PRODUCT_DEVICE := lancelot
-PRODUCT_NAME := twrp_lancelot
-PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := Redmi 9
-PRODUCT_MANUFACTURER := xiaomi
-
-PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-
-# Fastbootd
-PRODUCT_PACKAGES += \
-    android.hardware.fastboot@1.0-impl-mock \
-    android.hardware.fastboot@1.0-impl-mock.recovery \
-    fastbootd
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="lancelot-user 11 RP1A.200720.011 V12.5.6.0.RJCMIXM release-keys"
-
-BUILD_FINGERPRINT := Redmi/lancelot_global/lancelot:11/RP1A.200720.011/V12.5.6.0.RJCMIXM:user/release-keys
+#
