@@ -67,8 +67,8 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
 	# R11.1 Setings
 	export FOX_BUILD_TYPE="Unofficial"
-	export OF_MAINTAINER="@shas45558"
-	export FOX_VERSION="R11.1_2-@shas45558"
+	export OF_MAINTAINER="@nobel"
+	export FOX_VERSION="R12.1-@nobel"
 
 	export FOX_ENABLE_APP_MANAGER=1
 	export FOX_USE_BASH_SHELL=1
